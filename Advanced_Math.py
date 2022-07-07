@@ -8,6 +8,9 @@ root.title('Calculator')
 e = Entry(root, width=15, borderwidth=5)
 e.grid(row=0, column=0, columnspan=3, padx=10, pady=5)
 
+pi = math.pi()
+tangens = pi/180
+
 #function for Buttons.
 def NumPad(nmb):
     current = e.get()
@@ -40,22 +43,29 @@ def button_divide():
     e.delete(0, END)
     global factor
     factor = '/'
+def button_tan():
+    global nmb1
+    global ans
+    nmb1 = int(e.get())
+    ans = nmb1*tangens
 def button_equal():
     global nmb2
     nmb2 = int(e.get())
     e.delete(0, END)
     global ans
     if factor == '+':
-
-        e.insert(0, nmb1+nmb2)
+        ans = nmb1+nmb2
+        e.insert(0, ans)
     elif factor == '-':
         ans = nmb1-nmb2
-        e.insert(0, )
+        e.insert(0, ans)
     elif factor == '*':
         ans = nmb1*nmb2
         e.insert(0, ans)
     elif factor == '/':
         ans = nmb1/nmb2
+        e.insert(0, ans)
+    elif factor == 'tan':
         e.insert(0, ans)
 #Creating a Label (Text)
     
@@ -75,5 +85,5 @@ Button_multiply = Button(root, text='*', padx=21,pady=20, command=button_multipl
 Button_divide = Button(root, text='/', padx=21,pady=20, command=button_divide).grid(row=4, column=4)
 Button_equal = Button(root, text='=', padx=20,pady=20, command=button_equal, ).grid(row=5, column=0,)
 Button_clear = Button(root, text='c', padx=50,pady=20, command=button_clear, ).grid(row=5, column=1, columnspan=2)
-
+Button_tan = Button(root, text='tan', padx=20,pady=20, command=button_tan, ).grid(row=6, column=0, columnspan=2)
 root.mainloop()
